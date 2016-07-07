@@ -1,33 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using NHibernate.Transaction;
-using NServiceBus.Saga;
+using NServiceBus;
+using NServiceBus.Sagas;
 
 namespace TestSaga
 {
-    public class OrderSagaData : ContainSagaData
+    public class OrderSagaDataV6 : ContainSagaData
     {
 
-        [Unique]
         public virtual Guid WorkflowId { get; set; }
         
         public virtual string Title { get; set; }
 
-        public virtual Person Initiator { get; set; }
+        public virtual PersonV6 Initiator { get; set; }
 
-        public virtual IList<WorkflowTask> Tasks { get; set; }
+        public virtual IList<WorkflowTaskV6> Tasks { get; set; }
 
-        public OrderSagaData()
+        public OrderSagaDataV6()
         {
-            Initiator = new Person();
-            Tasks = new List<WorkflowTask>();
+            Initiator = new PersonV6();
+            Tasks = new List<WorkflowTaskV6>();
         }
     }
 
 
-    public class Person
+    public class PersonV6
     {
         public virtual string Surname { get; set; }
         public virtual string Lastname { get; set; }
@@ -35,7 +32,7 @@ namespace TestSaga
         public virtual string Email { get; set; }
     }
 
-    public class WorkflowTask
+    public class WorkflowTaskV6
     {
         public virtual Guid Id { get; set; }
         public virtual Guid SomeGuid { get; set; }
