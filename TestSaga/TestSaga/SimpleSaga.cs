@@ -16,17 +16,13 @@ namespace TestSaga
         public void Handle(StartSaga message)
         {
             Data.WorkflowId = message.WorkflowId;
-            Data.Initiator = new Person()
-            {
-                Email = "a@b.com",
-                Lastname = "Doe",
-                Surname = "Doe",
-                Login = "jdoe"
-            };
+            Data.Initiator.Email = "a@b.com";
+            Data.Initiator.Lastname = "Doe";
+            Data.Initiator.Surname = "Doe";
+            Data.Initiator.Login = "jdoe";
             Data.Title = "Something";
-            var taskList = new List<WorkflowTask>();
-            taskList.Add(new WorkflowTask() { WorkflowTaskId = Data.WorkflowId});
-        //    Data.Tasks = taskList;
+            
+            Data.Tasks.Add(new WorkflowTask() { WorkflowTaskId = Data.WorkflowId });
             RequestTimeout<MyCustomTimeout>(TimeSpan.FromSeconds(3));
         }
 
